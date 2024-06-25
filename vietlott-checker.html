@@ -207,21 +207,28 @@
 
           const resultDiv = document.getElementById("result");
           document.getElementById("loading").style.display = "none";
+
+          resultDiv.innerHTML += displaySuggestedNumbers(
+            matchingRecords,
+            currentLotteryType,
+            6
+          );
+
           if (matchingRecords.length > 0) {
-            resultDiv.innerHTML = `
-                        <p class="text-success">${matchingRecords.length} Match(es) found!</p>
-                    `;
+            resultDiv.innerHTML += `
+                <p class="text-success">${matchingRecords.length} Match(es) found!</p>
+            `;
             matchingRecords.forEach((record) => {
               const resultsArray = record.result;
               const lastNumber = resultsArray.pop();
               let resultHtml = `
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <p><strong>Record:</strong></p>
-                                    <ul class="list-group">
-                                        <li class="list-group-item">Date: ${record.date}</li>
-                                        <li class="list-group-item">ID: ${record.id}</li>
-                                        <li class="list-group-item">Result: [`;
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p><strong>Record:</strong></p>
+                            <ul class="list-group">
+                                <li class="list-group-item">Date: ${record.date}</li>
+                                <li class="list-group-item">ID: ${record.id}</li>
+                                <li class="list-group-item">Result: [`;
 
               // Append each result number with highlighting for user input numbers
               resultsArray.forEach((num) => {
@@ -241,16 +248,62 @@
               }
 
               resultHtml += `]</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        `;
+                            </ul>
+                        </div>
+                    </div>
+                `;
               resultDiv.innerHTML += resultHtml;
             });
           } else {
-            resultDiv.innerHTML = '<p class="text-danger">No match found.</p>';
+            resultDiv.innerHTML += '<p class="text-danger">No match found.</p>';
           }
         });
+      }
+
+      function generateRandomNumbers(data, lotteryType, count) {
+        const randomArrays = [];
+        const maxNumber = lotteryType === "power645" ? 45 : 55;
+
+        for (let i = 0; i < count; i++) {
+          const randomNumbers = [];
+          while (randomNumbers.length < 6) {
+            const randomNumber = Math.floor(Math.random() * maxNumber) + 1;
+            if (
+              !randomNumbers.includes(randomNumber) &&
+              !data.some((arr) => arr?.result?.includes(randomNumber)) &&
+              !randomArrays.some((arr) => arr?.includes(randomNumber))
+            ) {
+              randomNumbers.push(randomNumber);
+            }
+          }
+          randomArrays.push(randomNumbers);
+        }
+
+        return randomArrays;
+      }
+
+      function displaySuggestedNumbers(data, type, count) {
+        const suggestedNumbers = generateRandomNumbers(data, type, count);
+        console.log("suggestedNumbers", suggestedNumbers);
+        return `
+          <div class="card mb-3">
+            <div class="card-body">
+              <p><strong>Random numbers for you:</strong></p>
+              <ul class="list-group" >
+                  ${suggestedNumbers
+                    .map(
+                      (arr) =>
+                        `<li class="list-group-item">
+                      ${arr
+                        .map((num) => (num < 10 ? "0" + num : num))
+                        .join(", ")}
+                    </li>`
+                    )
+                    .join("")}
+              </ul>
+            </div>
+          </div>
+        `;
       }
     </script>
     <footer>
