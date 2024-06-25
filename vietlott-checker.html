@@ -28,13 +28,48 @@
       }
 
       .last-number {
-        color: red;
+        color: red !important;
       }
 
       .highlight {
         text-decoration: underline;
         font-weight: bold;
         color: blue;
+      }
+
+      footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        color: #999;
+        padding: 10px 0;
+        text-align: center;
+      }
+
+      .heart {
+        color: red;
+        animation: heartbeat 1s infinite;
+      }
+
+      @keyframes heartbeat {
+        0% {
+          transform: scale(0.75);
+        }
+        20% {
+          transform: scale(1);
+        }
+        40% {
+          transform: scale(0.75);
+        }
+        60% {
+          transform: scale(1);
+        }
+        80% {
+          transform: scale(0.75);
+        }
+        100% {
+          transform: scale(0.75);
+        }
       }
     </style>
   </head>
@@ -142,11 +177,11 @@
                                     <p><strong>Record:</strong></p>
                                     <ul class="list-group">
                                         <li class="list-group-item">Date: ${record.date}</li>
-                                        <li class="list-group-item">ID: "${record.id}"</li>
+                                        <li class="list-group-item">ID: ${record.id}</li>
                                         <li class="list-group-item">Result: [`;
 
               // Append each result number with highlighting for user input numbers
-              resultsArray.forEach((num, index) => {
+              resultsArray.forEach((num) => {
                 if (userInputSet.has(num)) {
                   resultHtml += `<span class="highlight">${num}</span>`;
                 } else {
@@ -175,5 +210,21 @@
         });
       }
     </script>
+    <footer>
+      <div>
+        &copy; 2024 ltthuong and ChatGPT
+        <span class="heart">&#10084;</span>
+      </div>
+      <div>
+        Thanks to
+        <a
+          href="https://github.com/vietvudanh/vietlott-data"
+          target="_blank"
+          style="text-decoration: underline"
+          >vietvudanh/vietlott-data</a
+        >
+        for the data
+      </div>
+    </footer>
   </body>
 </html>
