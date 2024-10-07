@@ -26,7 +26,7 @@ function Container() {
               <FirstPage />
             </div>
             <div className="section">
-              <div className="bg-amber-50">Section 2</div>
+              {/* <div className="bg-amber-50">Section 2</div> */}
             </div>
           </ReactFullpage.Wrapper>
         )}
