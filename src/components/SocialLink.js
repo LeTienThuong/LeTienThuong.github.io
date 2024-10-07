@@ -9,7 +9,7 @@ import {
 const socialItems = [
   {
     title: "GitHub",
-    url: "https://github.com/letienthuong",
+    url: "https://github.com/ltthuong",
     icon: <GithubOutlined />,
   },
   {
@@ -21,11 +21,6 @@ const socialItems = [
     title: "GitLab",
     url: "https://gitlab.com/letienthuong",
     icon: <GitlabOutlined />,
-  },
-  {
-    title: "Facebook",
-    url: "https://facebook.com/LTT.9x",
-    icon: <FacebookOutlined />,
   },
 ];
 
