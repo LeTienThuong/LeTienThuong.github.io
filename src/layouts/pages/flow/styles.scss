@@ -28,11 +28,16 @@
 .items {
   width: 100dvw;
   height: 100dvh;
-  mask: linear-gradient(to right, transparent 0%, black 30%);
-  font-size: 8rem;
+  font-size: 7rem;
   position: relative;
   display: grid;
   place-items: center;
+  mask: linear-gradient(to right, transparent 0%, black 30%);
+
+  @media screen and (max-width: 768px) {
+    font-size: 5rem;
+    mask: linear-gradient(to right, transparent 0%, black 20%);
+  }
 }
 
 .item {
