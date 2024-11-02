@@ -1,6 +1,7 @@
 import React from "react";
 import AnimatedCursor from "./layouts/AnimatedCursor";
 import Container from "./layouts/Container";
+import Flow from "./layouts/pages/flow/Flow";
 
 function App() {
   React.useEffect(() => {
@@ -10,14 +11,7 @@ function App() {
     };
   }, []);
 
-  return (
-    <>
-      <AnimatedCursor />
-      <main>
-        <Container />
-      </main>
-    </>
-  );
+  return <Flow />;
 }
 
 export default App;
